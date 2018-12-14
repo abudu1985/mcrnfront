@@ -22,11 +22,7 @@ const Application = StackNavigator({
 export default class App extends React.Component {
     render() {
         return (
-            <View style={styles.container}>
-                <ScrollView>
-                    <RegisterPage />
-                </ScrollView>
-            </View>
+            <Application>
         );
     }
 }
