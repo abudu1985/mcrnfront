@@ -3,6 +3,8 @@ import { View, Text } from 'react-native';
 import { Input, TextLink, Loading, Button } from './common';
 import axios from 'axios';
 import deviceStorage from '../services/deviceStorage';
+import * as Expo from 'expo';
+const { manifest } = Expo.Constants;
 
 class Registration extends Component {
   constructor(props){
@@ -24,8 +26,8 @@ class Registration extends Component {
 
     this.setState({ error: '', loading: true });
 
-    // NOTE Post to HTTPS only in production
-    axios.post("http://localhost:4000/api/v1/sign_up",{
+    // NOTE Post to HTTPS only in production  "172.18.0.1:5000/api/users/register"
+    axios.post("http://192.168.0.104:5000/api/users/register",{
       user: {
         email: email,
         password: password,

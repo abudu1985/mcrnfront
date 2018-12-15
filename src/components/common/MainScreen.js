@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Button, Loading } from '../components/common/';
-import axios from 'axios';
-import {Todo} from "../components/Todo";
-import {createDrawerNavigator} from "react-navigation";
-import * as Dimensions from "react-native";
-import SideMenu from "../components/SideMenu/SideMenu";
-import stackNav from "../components/common/stacknav";
+import React, {Component} from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button
+} from 'react-native';
+import * as axios from "axios";
 
-export default class LoggedIn extends Component {
+class MainScreen extends Component {
+
   constructor(props){
     super(props);
     this.state = {
@@ -39,29 +39,11 @@ export default class LoggedIn extends Component {
     });
   }
 
-  render() {
-    const { container, emailText, errorText } = styles;
-    const { loading, email, error } = this.state;
-
-    const RootDrawer = createDrawerNavigator({
-      Item1: {
-        screen: stackNav,
-      }
-    }, {
-      contentComponent: SideMenu,
-      drawerWidth: 200,
-    });
-
-    if (loading){
-      return(
-        <View style={container}>
-          <Loading size={'large'} />
-        </View>
-      )
-    } else {
-        return(
-      <View style={container}>
-        {/*<RootDrawer />*/}
+  render () {
+    return (
+      <View style={styles.container}>
+        <Text>Main</Text>
+        <Button onPress={() => this.props.navigation.navigate("Detail")} title="Detail Page" />
         <View>
           {email ?
             <Text style={emailText}>
@@ -76,15 +58,15 @@ export default class LoggedIn extends Component {
           Log Out
         </Button>
       </View>
-      );
-    }
+    );
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   emailText: {
     alignSelf: 'center',
@@ -96,4 +78,6 @@ const styles = {
     fontSize: 18,
     color: 'red'
   }
-};
+});
+
+export default MainScreen;

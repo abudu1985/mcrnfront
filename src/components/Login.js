@@ -24,7 +24,7 @@ class Login extends Component {
     this.setState({ error: '', loading: true });
 
     // NOTE Post to HTTPS only in production
-    axios.post("http://localhost:4000/api/v1/sign_in",{
+    axios.post("http://192.168.0.104:5000/api/users/login",{
         email: email,
         password: password
     })
