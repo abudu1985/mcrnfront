@@ -22,8 +22,8 @@ class SideMenu extends Component {
               Section 1
             </Text>
             <View style={styles.navSectionStyle}>
-              <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Page1')}>
-                Page1
+              <Text style={styles.navItemStyle} onPress={this.navigateToScreen("Todo")}>
+                Todo
               </Text>
             </View>
           </View>
@@ -32,21 +32,11 @@ class SideMenu extends Component {
               Section 2
             </Text>
             <View style={styles.navSectionStyle}>
-              <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Page2')}>
-                Page2
+              <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Profile')}>
+                Profile
               </Text>
               <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Page3')}>
                 Page3
-              </Text>
-            </View>
-          </View>
-          <View>
-            <Text style={styles.sectionHeadingStyle}>
-              Section 3
-            </Text>
-            <View style={styles.navSectionStyle}>
-              <Text style={styles.navItemStyle} onPress={this.navigateToScreen('Page4')}>
-                Page4
               </Text>
             </View>
           </View>

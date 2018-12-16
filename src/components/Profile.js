@@ -1,26 +1,28 @@
+
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button, Loading } from '../components/common/';
 import axios from 'axios';
-import {Todo} from "../components/Todo";
-import {createDrawerNavigator} from "react-navigation";
-import * as Dimensions from "react-native";
-import SideMenu from "../components/SideMenu/SideMenu";
-import stackNav from "../components/common/stacknav";
+import deviceStorage from '../services/deviceStorage.js';
 
-export default class LoggedIn extends Component {
+export default class Profile extends Component {
   constructor(props){
     super(props);
     this.state = {
       loading: true,
       email: '',
-      error: ''
+      error: '',
+      jwt: ''
     }
+    this.newJWT = this.newJWT.bind(this);
+    this.deleteJWT = deviceStorage.deleteJWT.bind(this);
+    this.loadJWT = deviceStorage.loadJWT.bind(this);
+    this.loadJWT();
   }
 
   componentDidMount(){
     const headers = {
-      'Authorization':  this.props.jwt
+      'Authorization': 'Bearer ' + this.jwt
     };
     axios({
       method: 'GET',
@@ -39,18 +41,15 @@ export default class LoggedIn extends Component {
     });
   }
 
+  newJWT(jwt){
+    this.setState({
+      jwt: jwt
+    });
+  }
+
   render() {
     const { container, emailText, errorText } = styles;
     const { loading, email, error } = this.state;
-
-    const RootDrawer = createDrawerNavigator({
-      Item1: {
-        screen: stackNav,
-      }
-    }, {
-      contentComponent: SideMenu,
-      drawerWidth: 250,
-    });
 
     if (loading){
       return(
@@ -59,8 +58,23 @@ export default class LoggedIn extends Component {
         </View>
       )
     } else {
-        return(
-          <RootDrawer />
+
+      return(
+        <View style={container}>
+          <View>
+            {email ?
+              <Text style={emailText}>
+                Your email: {email}
+              </Text>
+              :
+              <Text style={errorText}>
+                {error}
+              </Text>}
+          </View>
+          <Button onPress={this.deleteJWT}>
+            Log Out
+          </Button>
+        </View>
       );
     }
   }
